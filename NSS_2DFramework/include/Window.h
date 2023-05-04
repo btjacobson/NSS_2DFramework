@@ -4,24 +4,33 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include <stdio.h>
+
+#include "MouseListener.h"
+#include "KeyboardListener.h"
+
 class Window
 {
 public:
 	Window(int width, int height, const char* title);
 	~Window();
 
-	void HandleInput();
-	void Clear();
-	void Display();
+	bool ShouldClose();
+	int GetWidth();
+	int GetHeight();
 
-	bool IsRunning();
+	void Clear();
+	void HandleInput();
+	void Display();
+	void SetupCallbacks();
 
 private:
-	void Build();
+	int Init();
 
 	int width;
 	int height;
 	const char* title;
+
 	GLFWwindow* window;
 };
 

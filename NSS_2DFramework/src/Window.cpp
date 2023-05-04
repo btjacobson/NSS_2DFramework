@@ -1,5 +1,8 @@
 #include "Window.h"
 
+#include "MouseListener.h"
+#include "KeyboardListener.h"
+
 Window::Window(int width, int height, const char* title)
 {
 	this->width = width;
@@ -7,7 +10,7 @@ Window::Window(int width, int height, const char* title)
 	this->title = title;
 	this->window = nullptr;
 
-	Build();
+	Init();
 }
 
 Window::~Window()
@@ -15,14 +18,30 @@ Window::~Window()
 	glfwDestroyWindow(window);
 }
 
-void Window::HandleInput()
+bool Window::ShouldClose()
 {
-	glfwPollEvents();
+    return glfwWindowShouldClose(window);
+}
+
+int Window::GetWidth()
+{
+    return width;
+}
+
+int Window::GetHeight()
+{
+    return height;
 }
 
 void Window::Clear()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void Window::HandleInput()
+{
+	glfwPollEvents();
 }
 
 void Window::Display()
@@ -30,31 +49,42 @@ void Window::Display()
 	glfwSwapBuffers(window);
 }
 
-bool Window::IsRunning()
+void Window::SetupCallbacks()
 {
-	return !glfwWindowShouldClose(window);
+    glfwSetCursorPosCallback(window, MouseListener::GetInstance()->MousePositionCallback);
+    glfwSetMouseButtonCallback(window, MouseListener::GetInstance()->MouseButtonCallback);
+    glfwSetScrollCallback(window, MouseListener::GetInstance()->MouseScrollCallback);
+    glfwSetKeyCallback(window, KeyboardListener::GetInstance()->KeyCallback);
 }
 
-void Window::Build()
+int Window::Init()
 {
-	if (!glfwInit())
-	{
-		return;
-	}
+    if (!glfwInit())
+    {
+        fprintf(stderr, "ERROR: could not start GLFW\n");
+        return -1;
+    }
 
-	window = glfwCreateWindow(width, height, title, NULL, NULL);
-	if (!window)
-	{
-		glfwTerminate();
-		return;
-	}
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	glfwMakeContextCurrent(window);
+    window = glfwCreateWindow(width, height, title, NULL, NULL);
+    if (!window)
+    {
+        fprintf(stderr, "ERROR: could not open window with GLFW\n");
+        glfwTerminate();
+        return -1;
+    }
 
-	if (glewInit() != GLEW_OK)
-	{
-		return;
-	}
+    SetupCallbacks();
 
-	glViewport(0, 0, width, height);
+    glfwMakeContextCurrent(window);
+
+    glewExperimental = GL_TRUE;
+    glewInit();
+    glEnable(GL_DEPTH_TEST);
+
+    return 0;
 }

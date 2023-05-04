@@ -1,16 +1,9 @@
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-
-#include "Window.h"
+#include "Application.h"
 
 int main()
 {
-	Window window(800, 600, "Test");
+	Application application(800, 600, "Test");
+	application.Run();
 
-	while (window.IsRunning())
-	{
-		window.HandleInput();
-		window.Clear();
-		window.Display();
-	}
+	return 0;
 }
