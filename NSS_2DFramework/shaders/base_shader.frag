@@ -5,6 +5,7 @@ in vec2 TexCoord;
 out vec4 FragColor;
 
 uniform sampler2D ourTexture;
+uniform vec3 spriteColor;
 
 void main()
 {
@@ -14,5 +15,5 @@ void main()
 		discard;
 	}
 
-	FragColor = texColor;
+	FragColor = vec4(spriteColor, 1.0) * texColor;
 }

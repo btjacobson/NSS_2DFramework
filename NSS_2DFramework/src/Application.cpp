@@ -31,6 +31,7 @@ void Application::Run()
 	};
 
 	Shader shader("shaders/base_shader.vert", "shaders/base_shader.frag");
+	glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(window.GetWidth()), static_cast<GLfloat>(window.GetHeight()), 0.0f, -1.0f, 1.0f);
 
 	unsigned int VBO;
 	unsigned int VAO;
@@ -84,7 +85,9 @@ void Application::Run()
 		window.Clear();
 
 		shader.Use();
-		glUniform1i(glGetUniformLocation(shader.GetProgramID(), "ourTexture"), 0);
+		shader.SetInteger("ourTexture", 0);
+		shader.SetMatrix4("projection", projection);
+
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture);
 		
