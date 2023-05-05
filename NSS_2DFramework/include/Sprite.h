@@ -24,6 +24,8 @@ public:
 	void SetColor(glm::vec3 newColor);
 	void Rotate(GLfloat newRotation);
 
+	glm::vec2 GetPosition();
+
 private:
 	void InitRenderData();
 

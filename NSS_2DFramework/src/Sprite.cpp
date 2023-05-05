@@ -65,6 +65,11 @@ void Sprite::Rotate(GLfloat newRotation)
 	rotation = newRotation;
 }
 
+glm::vec2 Sprite::GetPosition()
+{
+	return position;
+}
+
 void Sprite::InitRenderData()
 {
 	GLuint vbo;

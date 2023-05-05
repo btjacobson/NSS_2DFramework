@@ -45,7 +45,7 @@ void Application::Run()
 		std::cout << "Failed to load texture" << std::endl;
 	}
 
-	Sprite sprite = Sprite();
+	sprite = Sprite();
 	Sprite sprite2 = Sprite();
 	Texture2D tTex = Texture2D();
 	Texture2D tTex2 = Texture2D();
@@ -93,5 +93,10 @@ void Application::HandleInput()
 	else if (KeyboardListener::GetInstance()->IsKeyPressed(GLFW_KEY_F2))
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+
+	if (KeyboardListener::GetInstance()->IsKeyPressed(GLFW_KEY_S))
+	{
+		sprite.SetPosition(glm::vec2(sprite.GetPosition().x + 1, sprite.GetPosition().y + 1));
 	}
 }
