@@ -72,5 +72,7 @@
   <ItemGroup>
     <None Include="shaders\base_shader.vert" />
     <None Include="shaders\base_shader.frag" />
+    <None Include="shaders\test.frag" />
+    <None Include="shaders\test.vert" />
   </ItemGroup>
 </Project>
