@@ -20,7 +20,7 @@ public:
 	void SetTexture(Texture2D* newTexture);
 	void SetShader(Shader* newShader);
 	void SetPosition(glm::vec2 newPosition);
-	void SetSize(glm::vec2 newSize);
+	void SetScale(glm::vec2 newSize);
 	void SetColor(glm::vec3 newColor);
 	void Rotate(GLfloat newRotation);
 

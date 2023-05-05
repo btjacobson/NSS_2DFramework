@@ -3,7 +3,7 @@
 Sprite::Sprite() : texture(nullptr), shader(nullptr), position(0.0f, 0.0f), size(0.0f, 0.0f),
 	color(1.0f, 1.0f, 1.0f), model(1.0f), rotation(0.0f)
 {
-
+	InitRenderData();
 }
 
 Sprite::~Sprite()
@@ -22,15 +22,17 @@ void Sprite::Draw()
 	model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f)); // Revert centering the origin
 	model = glm::scale(model, glm::vec3(size, 1.0f));
 	
+	shader->SetInteger("ourTexture", 0);
 	shader->SetMatrix4("model", model);
 	shader->SetVector3f("spriteColor", color);
 
-	glActiveTexture(GL_TEXTURE0);
 	texture->Bind();
 
 	glBindVertexArray(vao);
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
+	
+	texture->Unbind();
 }
 
 void Sprite::SetTexture(Texture2D* newTexture)
@@ -48,7 +50,7 @@ void Sprite::SetPosition(glm::vec2 newPosition)
 	position = newPosition;
 }
 
-void Sprite::SetSize(glm::vec2 newSize)
+void Sprite::SetScale(glm::vec2 newSize)
 {
 	size = newSize;
 }

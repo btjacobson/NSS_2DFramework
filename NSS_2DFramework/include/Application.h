@@ -7,6 +7,8 @@
 
 #include "Window.h"
 #include "Shader.h"
+#include "Sprite.h"
+#include "Texture2D.h"
 
 class Application
 {

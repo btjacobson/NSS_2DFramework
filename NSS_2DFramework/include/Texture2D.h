@@ -10,6 +10,7 @@ public:
 
 	void Generate(GLuint width, GLuint height, unsigned char* data);
 	void Bind();
+	void Unbind();
 
 private:
 	GLuint id;
