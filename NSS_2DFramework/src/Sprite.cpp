@@ -1,7 +1,8 @@
 #include "Sprite.h"
 
-Sprite::Sprite() : texture(nullptr), shader(nullptr), position(0.0f, 0.0f), size(0.0f, 0.0f),
-	color(1.0f, 1.0f, 1.0f), model(1.0f), rotation(0.0f)
+Sprite::Sprite(Texture2D* newTexture, Shader* newShader, glm::vec2 newPosition, glm::vec2 newScale, glm::vec3 newColor, GLfloat newRotation) : 
+	texture(newTexture), shader(newShader), position(newPosition), scale(newScale),
+	color(newColor), model(1.0f), rotation(newRotation)
 {
 	InitRenderData();
 }
@@ -11,18 +12,19 @@ Sprite::~Sprite()
 	glDeleteVertexArrays(1, &vao);
 }
 
-void Sprite::Draw()
+void Sprite::Draw(glm::mat4& projection)
 {
 	shader->Use();
 
 	model = glm::mat4(1.0f);
 	model = glm::translate(model, glm::vec3(position, 0.0f));
-	model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f)); // Center the origin before rotation
+	model = glm::translate(model, glm::vec3(0.5f * scale.x, 0.5f * scale.y, 0.0f)); // Center the origin before rotation
 	model = glm::rotate(model, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
-	model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f)); // Revert centering the origin
-	model = glm::scale(model, glm::vec3(size, 1.0f));
+	model = glm::translate(model, glm::vec3(-0.5f * scale.x, -0.5f * scale.y, 0.0f)); // Revert centering the origin
+	model = glm::scale(model, glm::vec3(scale, 1.0f));
 	
 	shader->SetInteger("ourTexture", 0);
+	shader->SetMatrix4("projection", projection);
 	shader->SetMatrix4("model", model);
 	shader->SetVector3f("spriteColor", color);
 
@@ -33,6 +35,11 @@ void Sprite::Draw()
 	glBindVertexArray(0);
 	
 	texture->Unbind();
+}
+
+void Sprite::Update()
+{
+
 }
 
 void Sprite::SetTexture(Texture2D* newTexture)
@@ -50,9 +57,9 @@ void Sprite::SetPosition(glm::vec2 newPosition)
 	position = newPosition;
 }
 
-void Sprite::SetScale(glm::vec2 newSize)
+void Sprite::SetScale(glm::vec2 newScale)
 {
-	size = newSize;
+	scale = newScale;
 }
 
 void Sprite::SetColor(glm::vec3 newColor)
@@ -63,11 +70,6 @@ void Sprite::SetColor(glm::vec3 newColor)
 void Sprite::Rotate(GLfloat newRotation)
 {
 	rotation = newRotation;
-}
-
-glm::vec2 Sprite::GetPosition()
-{
-	return position;
 }
 
 void Sprite::InitRenderData()

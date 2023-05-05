@@ -45,24 +45,16 @@ void Application::Run()
 		std::cout << "Failed to load texture" << std::endl;
 	}
 
-	sprite = Sprite();
-	Sprite sprite2 = Sprite();
-	Texture2D tTex = Texture2D();
-	Texture2D tTex2 = Texture2D();
-	tTex.Generate(16, 16, data);
-	tTex2.Generate(16, 16, data2);
+	Texture2D tTex = Texture2D(16, 16, data);
+	Texture2D tTex2 = Texture2D(16, 16, data2);
+	
+	Sprite sprite = Sprite(&tTex, &shader,
+		glm::vec2(100.0f, 100.0f),
+		glm::vec2(100.0f, 100.0f));
 
-	sprite.SetTexture(&tTex);
-	sprite.SetShader(&shader);
-	sprite.SetPosition(glm::vec2(100.0f, 100.0f));
-	sprite.SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
-	sprite.SetScale(glm::vec2(100.0f, 100.0f));
-
-	sprite2.SetTexture(&tTex2);
-	sprite2.SetShader(&shader);
-	sprite2.SetPosition(glm::vec2(200.0f, 100.0f));
-	sprite2.SetColor(glm::vec3(1.0f, 1.0f, 1.0f));
-	sprite2.SetScale(glm::vec2(100.0f, 100.0f));
+	Sprite sprite2 = Sprite(&tTex2, &shader, 
+		glm::vec2(200.0f, 100.0f), 
+		glm::vec2(100.0f, 100.0f));
 
 	stbi_image_free(data);
 	stbi_image_free(data2);
@@ -72,10 +64,8 @@ void Application::Run()
 		HandleInput();
 		window.Clear();
 
-		shader.Use();
-		shader.SetMatrix4("projection", projection);
-		sprite.Draw();
-		sprite2.Draw();
+		sprite.Draw(projection);
+		sprite2.Draw(projection);
 
 		window.Display();
 		MouseListener::GetInstance()->EndFrame();
@@ -93,10 +83,5 @@ void Application::HandleInput()
 	else if (KeyboardListener::GetInstance()->IsKeyPressed(GLFW_KEY_F2))
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
-
-	if (KeyboardListener::GetInstance()->IsKeyPressed(GLFW_KEY_S))
-	{
-		sprite.SetPosition(glm::vec2(sprite.GetPosition().x + 1, sprite.GetPosition().y + 1));
 	}
 }

@@ -1,9 +1,10 @@
 #include "Texture2D.h"
 
-Texture2D::Texture2D() : width(0), height(0), internalFormat(GL_RGBA), imageFormat(GL_RGBA),
+Texture2D::Texture2D(GLuint width, GLuint height, unsigned char* data) : 
+	width(width), height(height), internalFormat(GL_RGBA), imageFormat(GL_RGBA),
 	wrapS(GL_REPEAT), wrapT(GL_REPEAT), filterMin(GL_NEAREST), filterMax(GL_NEAREST)
 {
-
+	Generate(width, height, data);
 }
 
 void Texture2D::Generate(GLuint width, GLuint height, unsigned char* data)

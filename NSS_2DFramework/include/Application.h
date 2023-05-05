@@ -21,7 +21,6 @@ public:
 
 private:
 	Window window;
-	Sprite sprite;
 };
 
 #endif

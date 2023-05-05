@@ -6,7 +6,7 @@
 class Texture2D
 {
 public:
-	Texture2D();
+	Texture2D(GLuint width, GLuint height, unsigned char* data);
 
 	void Generate(GLuint width, GLuint height, unsigned char* data);
 	void Bind();
