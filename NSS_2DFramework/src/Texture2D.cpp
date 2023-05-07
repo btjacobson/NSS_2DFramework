@@ -1,4 +1,4 @@
-#include "Texture2D.h"
+#include "Texture2D.hpp"
 
 Texture2D::Texture2D(GLuint width, GLuint height, unsigned char* data) : 
 	width(width), height(height), internalFormat(GL_RGBA), imageFormat(GL_RGBA),

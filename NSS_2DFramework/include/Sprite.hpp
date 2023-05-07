@@ -1,13 +1,13 @@
-#ifndef SPRITE_H
-#define SPRITE_H
+#ifndef SPRITE_HPP
+#define SPRITE_HPP
 
 #include "GL/glew.h"
 #include "glm.hpp"
 #include "gtc/type_ptr.hpp"
 #include "gtc/matrix_transform.hpp"
 
-#include "Texture2D.h"
-#include "Shader.h"
+#include "Texture2D.hpp"
+#include "Shader.hpp"
 
 class Sprite
 {

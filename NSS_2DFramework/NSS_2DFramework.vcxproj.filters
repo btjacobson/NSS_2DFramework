@@ -30,7 +30,7 @@
     <ClCompile Include="src\KeyboardListener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\Application.h">
+    <ClCompile Include="include\Application.hpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Application.cpp">
@@ -42,30 +42,42 @@
     <ClCompile Include="src\Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\SpriteRenderer.cpp">
+    <ClCompile Include="src\BatchRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpriteSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AssetManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Window.h">
+    <ClInclude Include="include\Window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Shader.h">
+    <ClInclude Include="include\Shader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\MouseListener.h">
+    <ClInclude Include="include\MouseListener.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\KeyboardListener.h">
+    <ClInclude Include="include\KeyboardListener.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SpriteRenderer.h">
+    <ClInclude Include="include\BatchRenderer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Sprite.h">
+    <ClInclude Include="include\Sprite.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Texture2D.h">
+    <ClInclude Include="include\Texture2D.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpriteSheet.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AssetManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

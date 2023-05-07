@@ -1,4 +1,4 @@
-#include "MouseListener.h"
+#include "MouseListener.hpp"
 
 MouseListener* MouseListener::instance = new MouseListener();
 

@@ -1,13 +1,13 @@
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef WINDOW_HPP
+#define WINDOW_HPP
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 #include <stdio.h>
 
-#include "MouseListener.h"
-#include "KeyboardListener.h"
+#include "MouseListener.hpp"
+#include "KeyboardListener.hpp"
 
 class Window
 {

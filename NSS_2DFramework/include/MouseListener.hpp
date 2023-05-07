@@ -1,5 +1,5 @@
-#ifndef MOUSE_LISTENER_H
-#define MOUSE_LISTENER_H
+#ifndef MOUSE_LISTENER_HPP
+#define MOUSE_LISTENER_HPP
 
 #include <GLFW/glfw3.h>
 
