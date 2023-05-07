@@ -1,9 +1,13 @@
 #include "Application.hpp"
 
+#include <windows.h>
+
 Application::Application(int width, int height, const char* title) :
 	window(width, height, title)
 {
-
+	AssetManager::GetInstance()->LoadTextureFromFile("assets/sprite.png", "coin");
+	AssetManager::GetInstance()->LoadShaderFromFile("shaders/base_shader.vert", "shaders/base_shader_frag", "basic");
+	AssetManager::GetInstance()->LoadShaderFromFile("shaders/test_shader.vert", "shaders/test_shader_frag", "test");
 }
 
 Application::~Application()
@@ -14,25 +18,19 @@ Application::~Application()
 void Application::Run()
 {
 	glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(window.GetWidth()), static_cast<GLfloat>(window.GetHeight()), 0.0f, -1.0f, 1.0f);
-
-	//Texture2D tTex = Texture2D(16, 16, data);
-	//Texture2D tTex2 = Texture2D(16, 16, data2);
 	
-	//Sprite sprite = Sprite(&tTex, &shader,
-	//	glm::vec2(100.0f, 100.0f),
-	//	glm::vec2(100.0f, 100.0f));
-
-	//Sprite sprite2 = Sprite(&tTex2, &shader, 
-	//	glm::vec2(200.0f, 100.0f), 
-	//	glm::vec2(100.0f, 100.0f));
+	Sprite sprite = Sprite(
+		AssetManager::GetInstance()->GetTexture("coin"), 
+		AssetManager::GetInstance()->GetShader("basic"),
+		glm::vec2(100.0f, 100.0f),
+		glm::vec2(100.0f, 100.0f));
 
 	while (!window.ShouldClose())
 	{
 		HandleInput();
 		window.Clear();
 
-		//sprite.Draw(projection);
-		//sprite2.Draw(projection);
+		sprite.Draw(projection);
 
 		window.Display();
 		MouseListener::GetInstance()->EndFrame();

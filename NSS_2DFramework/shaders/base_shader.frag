@@ -9,7 +9,7 @@ uniform vec3 spriteColor;
 
 void main()
 {
-	vec4 texColor = texture2D(ourTexture, TexCoord);
+	vec4 texColor = texture(ourTexture, TexCoord);
 	if (texColor.a < 0.1)
 	{
 		discard;

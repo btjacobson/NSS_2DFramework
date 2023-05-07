@@ -1,5 +1,7 @@
 #include "AssetManager.hpp"
 
+#include "stb_image.h"
+
 AssetManager* AssetManager::instance = nullptr;
 std::mutex AssetManager::mutex;
 
@@ -23,7 +25,6 @@ AssetManager::~AssetManager()
 	shaders.clear();
 
 	delete instance;
-	instance = nullptr;
 }
 
 AssetManager* AssetManager::GetInstance()
@@ -38,25 +39,21 @@ AssetManager* AssetManager::GetInstance()
 	return instance;
 }
 
-void AssetManager::LoadTextureFromFile(const char* filepath, const char* name, int x, int y)
+void AssetManager::LoadTextureFromFile(const char* filepath, const char* name)
 {
 	int width;
 	int height;
 	int channels;
 
-	unsigned char* data = stbi_load(filepath, &width, &height, &channels, STBI_rgb_alpha);
-	unsigned char* data2 = stbi_load(filepath, &width, &height, &channels, STBI_rgb_alpha);
-	if (data)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	else
+	unsigned char* data = stbi_load(filepath, &width, &height, &channels, GL_RGBA);
+	if (!data)
 	{
 		std::cout << "Failed to load texture: " << filepath << std::endl;
 	}
 
-	Texture2D* tTexture = new Texture2D(x, y, data);
+	GLenum format = (channels ? GL_RGBA : GL_RGB);
+
+	Texture2D* tTexture = new Texture2D(width, height, format, data);
 	stbi_image_free(data);
 
 	textures.emplace(std::make_pair(name, tTexture));

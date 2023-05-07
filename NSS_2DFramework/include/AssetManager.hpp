@@ -5,9 +5,6 @@
 #include <mutex>
 #include <string>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-
 #include "Texture2D.hpp"
 #include "Shader.hpp"
 
@@ -20,7 +17,7 @@ public:
 	
 	void operator=(const AssetManager& other) = delete;
 
-	void LoadTextureFromFile(const char* filepath, const char* name, int x, int y);
+	void LoadTextureFromFile(const char* filepath, const char* name);
 	void LoadShaderFromFile(const char* vertexFilepath, const char* fragmentFilePath, const char* name);
 	void RemoveTexture(std::string textureName);
 	void RemoveShader(std::string shaderName);

@@ -9,6 +9,7 @@
 #include "Shader.hpp"
 #include "Sprite.hpp"
 #include "Texture2D.hpp"
+#include "AssetManager.hpp"
 
 class Application
 {

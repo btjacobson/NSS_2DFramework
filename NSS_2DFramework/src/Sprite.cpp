@@ -14,7 +14,13 @@ Sprite::~Sprite()
 
 void Sprite::Draw(glm::mat4& projection)
 {
+	texture->Bind();
 	shader->Use();
+
+	shader->SetInteger("ourTexture", 0);
+	shader->SetMatrix4("projection", projection);
+	shader->SetMatrix4("model", model);
+	shader->SetVector3f("spriteColor", color);
 
 	model = glm::mat4(1.0f);
 	model = glm::translate(model, glm::vec3(position, 0.0f));
@@ -22,13 +28,6 @@ void Sprite::Draw(glm::mat4& projection)
 	model = glm::rotate(model, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
 	model = glm::translate(model, glm::vec3(-0.5f * scale.x, -0.5f * scale.y, 0.0f)); // Revert centering the origin
 	model = glm::scale(model, glm::vec3(scale, 1.0f));
-	
-	shader->SetInteger("ourTexture", 0);
-	shader->SetMatrix4("projection", projection);
-	shader->SetMatrix4("model", model);
-	shader->SetVector3f("spriteColor", color);
-
-	texture->Bind();
 
 	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

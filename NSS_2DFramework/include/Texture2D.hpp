@@ -6,9 +6,9 @@
 class Texture2D
 {
 public:
-	Texture2D(GLuint width, GLuint height, unsigned char* data);
+	Texture2D(GLuint width, GLuint height, GLenum format, unsigned char* data);
 
-	void Generate(GLuint width, GLuint height, unsigned char* data);
+	void Generate(GLuint width, GLuint height, GLenum format, unsigned char* data);
 	void Bind();
 	void Unbind();
 
@@ -16,8 +16,6 @@ private:
 	GLuint id;
 	GLuint width;
 	GLuint height;
-	GLuint internalFormat;
-	GLuint imageFormat;
 	GLuint wrapS;
 	GLuint wrapT;
 	GLuint filterMin;
