@@ -135,29 +135,43 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\AssetManager.cpp" />
-    <ClCompile Include="src\Sprite.cpp" />
-    <ClCompile Include="src\BatchRenderer.cpp" />
-    <ClCompile Include="src\SpriteSheet.cpp" />
-    <ClCompile Include="src\Texture2D.cpp" />
+    <ClCompile Include="include\states\Game_State.h" />
+    <ClCompile Include="src\managers\Asset_Manager.cpp" />
+    <ClCompile Include="src\managers\Entity_Manager.cpp" />
+    <ClCompile Include="src\managers\State_Manager.cpp" />
+    <ClCompile Include="src\renderer\Sprite.cpp" />
+    <ClCompile Include="src\renderer\BatchRenderer.cpp" />
+    <ClCompile Include="src\renderer\SpriteSheet.cpp" />
+    <ClCompile Include="src\states\Base_State.cpp" />
+    <ClCompile Include="src\states\Credits_State.cpp" />
+    <ClCompile Include="src\states\Game_State.cpp" />
+    <ClCompile Include="src\states\Intro_State.cpp" />
+    <ClCompile Include="src\states\MainMenu_State.cpp" />
+    <ClCompile Include="src\renderer\Texture2D.cpp" />
     <ClCompile Include="src\Application.cpp" />
-    <ClCompile Include="include\Application.hpp" />
-    <ClCompile Include="src\KeyboardListener.cpp" />
+    <ClCompile Include="include\Application.h" />
+    <ClCompile Include="src\listeners\KeyboardListener.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\MouseListener.cpp" />
-    <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\listeners\MouseListener.cpp" />
+    <ClCompile Include="src\renderer\Shader.cpp" />
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\AssetManager.hpp" />
-    <ClInclude Include="include\KeyboardListener.hpp" />
-    <ClInclude Include="include\MouseListener.hpp" />
-    <ClInclude Include="include\Shader.hpp" />
-    <ClInclude Include="include\Sprite.hpp" />
-    <ClInclude Include="include\BatchRenderer.hpp" />
-    <ClInclude Include="include\SpriteSheet.hpp" />
-    <ClInclude Include="include\Texture2D.hpp" />
-    <ClInclude Include="include\Window.hpp" />
+    <ClInclude Include="include\managers\Asset_Manager.h" />
+    <ClInclude Include="include\managers\Entity_Manager.h" />
+    <ClInclude Include="include\managers\State_Manager.h" />
+    <ClInclude Include="include\states\Base_State.h" />
+    <ClInclude Include="include\listeners\KeyboardListener.h" />
+    <ClInclude Include="include\listeners\MouseListener.h" />
+    <ClInclude Include="include\renderer\Shader.h" />
+    <ClInclude Include="include\renderer\Sprite.h" />
+    <ClInclude Include="include\renderer\BatchRenderer.h" />
+    <ClInclude Include="include\renderer\SpriteSheet.h" />
+    <ClInclude Include="include\states\Credits_State.h" />
+    <ClInclude Include="include\states\Intro_State.h" />
+    <ClInclude Include="include\states\MainMenu_State.h" />
+    <ClInclude Include="include\renderer\Texture2D.h" />
+    <ClInclude Include="include\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\base_shader.frag" />

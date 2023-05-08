@@ -6,8 +6,8 @@
 
 #include <stdio.h>
 
-#include "MouseListener.h"
-#include "KeyboardListener.h"
+#include "listeners/MouseListener.h"
+#include "listeners/KeyboardListener.h"
 
 class Window
 {

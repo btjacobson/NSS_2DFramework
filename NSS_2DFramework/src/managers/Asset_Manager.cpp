@@ -1,14 +1,14 @@
-#include "AssetManager.h"
+#include "managers/Asset_Manager.h"
 
-AssetManager* AssetManager::instance = nullptr;
-std::mutex AssetManager::mutex;
+Asset_Manager* Asset_Manager::instance = nullptr;
+std::mutex Asset_Manager::mutex;
 
-AssetManager::AssetManager()
+Asset_Manager::Asset_Manager()
 {
 
 }
 
-AssetManager::~AssetManager()
+Asset_Manager::~Asset_Manager()
 {
 	for (auto textureItr = textures.begin(); textureItr != textures.end(); textureItr++)
 	{
@@ -25,19 +25,19 @@ AssetManager::~AssetManager()
 	delete instance;
 }
 
-AssetManager* AssetManager::GetInstance()
+Asset_Manager* Asset_Manager::GetInstance()
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
 	if (instance == nullptr) 
 	{
-		instance = new AssetManager();
+		instance = new Asset_Manager();
 	}
 
 	return instance;
 }
 
-void AssetManager::LoadTextureFromFile(const char* filepath, const char* name)
+void Asset_Manager::LoadTextureFromFile(const char* filepath, const char* name)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
@@ -46,7 +46,7 @@ void AssetManager::LoadTextureFromFile(const char* filepath, const char* name)
 	textures.emplace(std::make_pair(name, tTexture));
 }
 
-void AssetManager::LoadShaderFromFile(const char* vertexFilepath, const char* fragmentFilePath, const char* name)
+void Asset_Manager::LoadShaderFromFile(const char* vertexFilepath, const char* fragmentFilePath, const char* name)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
@@ -55,7 +55,7 @@ void AssetManager::LoadShaderFromFile(const char* vertexFilepath, const char* fr
 	shaders.emplace(std::make_pair(name, tShader));
 }
 
-void AssetManager::RemoveTexture(std::string textureName)
+void Asset_Manager::RemoveTexture(std::string textureName)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
@@ -67,7 +67,7 @@ void AssetManager::RemoveTexture(std::string textureName)
 	}
 }
 
-void AssetManager::RemoveShader(std::string shaderName)
+void Asset_Manager::RemoveShader(std::string shaderName)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
@@ -79,7 +79,7 @@ void AssetManager::RemoveShader(std::string shaderName)
 	}
 }
 
-Texture2D* AssetManager::GetTexture(std::string textureName)
+Texture2D* Asset_Manager::GetTexture(std::string textureName)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
@@ -92,7 +92,7 @@ Texture2D* AssetManager::GetTexture(std::string textureName)
 	return nullptr;
 }
 
-Shader* AssetManager::GetShader(std::string shaderName)
+Shader* Asset_Manager::GetShader(std::string shaderName)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 

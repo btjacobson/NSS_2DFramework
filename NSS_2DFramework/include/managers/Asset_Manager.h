@@ -5,17 +5,17 @@
 #include <mutex>
 #include <string>
 
-#include "Texture2D.h"
-#include "Shader.h"
+#include "renderer/Texture2D.h"
+#include "renderer/Shader.h"
 
-class AssetManager
+class Asset_Manager
 {
 public:
-	static AssetManager* GetInstance();
+	static Asset_Manager* GetInstance();
 
-	AssetManager(AssetManager& other) = delete;
+	Asset_Manager(Asset_Manager& other) = delete;
 	
-	void operator=(const AssetManager& other) = delete;
+	void operator=(const Asset_Manager& other) = delete;
 
 	void LoadTextureFromFile(const char* filepath, const char* name);
 	void LoadShaderFromFile(const char* vertexFilepath, const char* fragmentFilePath, const char* name);
@@ -26,11 +26,11 @@ public:
 	Shader* GetShader(std::string shaderName);
 
 protected:
-	static AssetManager* instance;
+	static Asset_Manager* instance;
 	static std::mutex mutex;
 
-	AssetManager();
-	~AssetManager();
+	Asset_Manager();
+	~Asset_Manager();
 
 private:
 	std::unordered_map<std::string, Texture2D*> textures;

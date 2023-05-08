@@ -1,4 +1,4 @@
-#include "Application.h"
+#include "core/Application.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"

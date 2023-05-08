@@ -6,10 +6,11 @@
 #include "gtc/matrix_transform.hpp"
 
 #include "Window.h"
-#include "Shader.h"
-#include "Sprite.h"
-#include "Texture2D.h"
-#include "AssetManager.h"
+
+#include "renderer/Shader.h"
+#include "renderer/Sprite.h"
+#include "renderer/Texture2D.h"
+#include "managers/Asset_Manager.h"
 
 class Application
 {
