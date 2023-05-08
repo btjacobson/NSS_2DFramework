@@ -1,7 +1,5 @@
 #include "AssetManager.hpp"
 
-#include "stb_image.h"
-
 AssetManager* AssetManager::instance = nullptr;
 std::mutex AssetManager::mutex;
 
@@ -41,26 +39,17 @@ AssetManager* AssetManager::GetInstance()
 
 void AssetManager::LoadTextureFromFile(const char* filepath, const char* name)
 {
-	int width;
-	int height;
-	int channels;
+	std::lock_guard<std::mutex> lock(mutex);
 
-	unsigned char* data = stbi_load(filepath, &width, &height, &channels, GL_RGBA);
-	if (!data)
-	{
-		std::cout << "Failed to load texture: " << filepath << std::endl;
-	}
-
-	GLenum format = (channels ? GL_RGBA : GL_RGB);
-
-	Texture2D* tTexture = new Texture2D(width, height, format, data);
-	stbi_image_free(data);
+	Texture2D* tTexture = new Texture2D(filepath);
 
 	textures.emplace(std::make_pair(name, tTexture));
 }
 
 void AssetManager::LoadShaderFromFile(const char* vertexFilepath, const char* fragmentFilePath, const char* name)
 {
+	std::lock_guard<std::mutex> lock(mutex);
+
 	Shader* tShader = new Shader(vertexFilepath, fragmentFilePath);
 
 	shaders.emplace(std::make_pair(name, tShader));
@@ -68,6 +57,8 @@ void AssetManager::LoadShaderFromFile(const char* vertexFilepath, const char* fr
 
 void AssetManager::RemoveTexture(std::string textureName)
 {
+	std::lock_guard<std::mutex> lock(mutex);
+
 	auto tTexture = textures.find(textureName);
 	if (tTexture != textures.end())
 	{
@@ -78,6 +69,8 @@ void AssetManager::RemoveTexture(std::string textureName)
 
 void AssetManager::RemoveShader(std::string shaderName)
 {
+	std::lock_guard<std::mutex> lock(mutex);
+
 	auto tShader = shaders.find(shaderName);
 	if (tShader != shaders.end())
 	{
@@ -88,6 +81,8 @@ void AssetManager::RemoveShader(std::string shaderName)
 
 Texture2D* AssetManager::GetTexture(std::string textureName)
 {
+	std::lock_guard<std::mutex> lock(mutex);
+
 	auto tTexture = textures.find(textureName);
 	if (tTexture != textures.end())
 	{
@@ -99,6 +94,8 @@ Texture2D* AssetManager::GetTexture(std::string textureName)
 
 Shader* AssetManager::GetShader(std::string shaderName)
 {
+	std::lock_guard<std::mutex> lock(mutex);
+
 	auto tShader = shaders.find(shaderName);
 	if (tShader != shaders.end())
 	{

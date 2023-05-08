@@ -6,8 +6,8 @@ Application::Application(int width, int height, const char* title) :
 	window(width, height, title)
 {
 	AssetManager::GetInstance()->LoadTextureFromFile("assets/sprite.png", "coin");
-	AssetManager::GetInstance()->LoadShaderFromFile("shaders/base_shader.vert", "shaders/base_shader_frag", "basic");
-	AssetManager::GetInstance()->LoadShaderFromFile("shaders/test_shader.vert", "shaders/test_shader_frag", "test");
+	AssetManager::GetInstance()->LoadShaderFromFile("shaders/base_shader.vert", "shaders/base_shader.frag", "basic");
+	AssetManager::GetInstance()->LoadShaderFromFile("shaders/test_shader.vert", "shaders/test_shader.frag", "test");
 }
 
 Application::~Application()
@@ -18,7 +18,7 @@ Application::~Application()
 void Application::Run()
 {
 	glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(window.GetWidth()), static_cast<GLfloat>(window.GetHeight()), 0.0f, -1.0f, 1.0f);
-	
+
 	Sprite sprite = Sprite(
 		AssetManager::GetInstance()->GetTexture("coin"), 
 		AssetManager::GetInstance()->GetShader("basic"),

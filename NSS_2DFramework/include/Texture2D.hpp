@@ -3,23 +3,27 @@
 
 #include "GL/glew.h"
 
+#include <iostream>
+
 class Texture2D
 {
 public:
-	Texture2D(GLuint width, GLuint height, GLenum format, unsigned char* data);
+	Texture2D(const char* filepath);
 
-	void Generate(GLuint width, GLuint height, GLenum format, unsigned char* data);
+	void Generate(const char* filepath);
 	void Bind();
 	void Unbind();
 
 private:
 	GLuint id;
-	GLuint width;
-	GLuint height;
 	GLuint wrapS;
 	GLuint wrapT;
 	GLuint filterMin;
 	GLuint filterMax;
+
+	int width;
+	int height;
+	int channels;
 };
 
 #endif
