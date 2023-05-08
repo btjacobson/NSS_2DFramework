@@ -1,5 +1,5 @@
-#ifndef TEXTURE_2D_HPP
-#define TEXTURE_2D_HPP
+#ifndef TEXTURE_2D_H
+#define TEXTURE_2D_H
 
 #include "GL/glew.h"
 

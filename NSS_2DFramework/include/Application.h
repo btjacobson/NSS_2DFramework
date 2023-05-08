@@ -1,15 +1,15 @@
-#ifndef APPLICATION_HPP
-#define APPLICATION_HPP
+#ifndef APPLICATION_H
+#define APPLICATION_H
 
 #include "glm.hpp"
 #include "gtc/type_ptr.hpp"
 #include "gtc/matrix_transform.hpp"
 
-#include "Window.hpp"
-#include "Shader.hpp"
-#include "Sprite.hpp"
-#include "Texture2D.hpp"
-#include "AssetManager.hpp"
+#include "Window.h"
+#include "Shader.h"
+#include "Sprite.h"
+#include "Texture2D.h"
+#include "AssetManager.h"
 
 class Application
 {

@@ -1,4 +1,4 @@
-#include "Texture2D.hpp"
+#include "Texture2D.h"
 
 #include "stb_image.h"
 

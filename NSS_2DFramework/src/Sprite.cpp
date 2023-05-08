@@ -1,4 +1,4 @@
-#include "Sprite.hpp"
+#include "Sprite.h"
 
 Sprite::Sprite(Texture2D* newTexture, Shader* newShader, glm::vec2 newPosition, glm::vec2 newScale, glm::vec3 newColor, GLfloat newRotation) : 
 	texture(newTexture), shader(newShader), position(newPosition), scale(newScale),

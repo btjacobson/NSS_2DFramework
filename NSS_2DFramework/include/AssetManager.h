@@ -1,12 +1,12 @@
-#ifndef ASSET_MANAGER_HPP
-#define ASSET_MANAGER_HPP
+#ifndef ASSET_MANAGER_H
+#define ASSET_MANAGER_H
 
 #include <unordered_map>
 #include <mutex>
 #include <string>
 
-#include "Texture2D.hpp"
-#include "Shader.hpp"
+#include "Texture2D.h"
+#include "Shader.h"
 
 class AssetManager
 {

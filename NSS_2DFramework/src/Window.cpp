@@ -1,7 +1,6 @@
-#include "Window.hpp"
-
-#include "MouseListener.hpp"
-#include "KeyboardListener.hpp"
+#include "Window.h"
+#include "MouseListener.h"
+#include "KeyboardListener.h"
 
 Window::Window(int width, int height, const char* title)
 {

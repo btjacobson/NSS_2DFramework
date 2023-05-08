@@ -1,5 +1,5 @@
-#ifndef KEYBOARD_LISTENER_HPP
-#define KEYBOARD_LISTENER_HPP
+#ifndef KEYBOARD_LISTENER_H
+#define KEYBOARD_LISTENER_H
 
 #include "GLFW/glfw3.h"
 

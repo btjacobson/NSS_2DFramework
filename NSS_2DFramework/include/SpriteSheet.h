@@ -1,5 +1,5 @@
-#ifndef SPRITE_SHEET_HPP
-#define SPRITE_SHEET_HPP
+#ifndef SPRITE_SHEET_H
+#define SPRITE_SHEET_H
 
 class SpriteSheet
 {

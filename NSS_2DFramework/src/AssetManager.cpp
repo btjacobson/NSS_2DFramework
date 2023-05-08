@@ -1,4 +1,4 @@
-#include "AssetManager.hpp"
+#include "AssetManager.h"
 
 AssetManager* AssetManager::instance = nullptr;
 std::mutex AssetManager::mutex;
