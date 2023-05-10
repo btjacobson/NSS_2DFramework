@@ -41,6 +41,12 @@ void Asset_Manager::LoadTextureFromFile(const char* filepath, const char* name)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
+	auto exists = textures.find(name);
+	if (exists != textures.end())
+	{
+		return;
+	}
+
 	Texture2D* tTexture = new Texture2D(filepath);
 
 	textures.emplace(std::make_pair(name, tTexture));
@@ -49,6 +55,12 @@ void Asset_Manager::LoadTextureFromFile(const char* filepath, const char* name)
 void Asset_Manager::LoadShaderFromFile(const char* vertexFilepath, const char* fragmentFilePath, const char* name)
 {
 	std::lock_guard<std::mutex> lock(mutex);
+
+	auto exists = shaders.find(name);
+	if (exists != shaders.end())
+	{
+		return;
+	}
 
 	Shader* tShader = new Shader(vertexFilepath, fragmentFilePath);
 

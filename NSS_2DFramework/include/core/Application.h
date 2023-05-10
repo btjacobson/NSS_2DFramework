@@ -1,6 +1,8 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include <vector>
+
 #include "glm.hpp"
 #include "gtc/type_ptr.hpp"
 #include "gtc/matrix_transform.hpp"
@@ -23,6 +25,8 @@ public:
 
 private:
 	Window window;
+
+	std::vector<std::vector<Sprite*>> test;
 };
 
 #endif
