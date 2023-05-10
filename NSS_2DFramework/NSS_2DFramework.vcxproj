@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\Camera2D.cpp" />
     <ClCompile Include="include\states\Game_State.h" />
     <ClCompile Include="src\core\Entity.cpp" />
     <ClCompile Include="src\managers\Asset_Manager.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="src\core\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\core\Camera2D.h" />
     <ClInclude Include="include\core\Entity.h" />
     <ClInclude Include="include\managers\Asset_Manager.h" />
     <ClInclude Include="include\managers\Entity_Manager.h" />

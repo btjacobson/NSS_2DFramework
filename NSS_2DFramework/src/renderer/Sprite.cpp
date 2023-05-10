@@ -1,7 +1,7 @@
 #include "renderer/Sprite.h"
 
-Sprite::Sprite(Texture2D* newTexture, Shader* newShader, glm::vec2 newPosition, glm::vec2 newScale, glm::vec3 newColor, GLfloat newRotation) : 
-	texture(newTexture), shader(newShader), position(newPosition), scale(newScale),
+Sprite::Sprite(Texture2D* newTexture, Shader* newShader, glm::vec2 newPosition, GLuint newZOrder, glm::vec2 newScale, glm::vec3 newColor, GLfloat newRotation) :
+	texture(newTexture), shader(newShader), position(newPosition), zOrder(newZOrder), scale(newScale),
 	color(newColor), model(1.0f), rotation(newRotation)
 {
 	InitRenderData();
@@ -12,21 +12,22 @@ Sprite::~Sprite()
 	glDeleteVertexArrays(1, &vao);
 }
 
-void Sprite::Draw(glm::mat4& projection)
+void Sprite::Draw(glm::mat4& projection, glm::mat4& view)
 {
 	texture->Bind();
 	shader->Use();
 
 	shader->SetInteger("ourTexture", 0);
 	shader->SetMatrix4("projection", projection);
+	shader->SetMatrix4("view", view);
 	shader->SetMatrix4("model", model);
 	shader->SetVector3f("spriteColor", color);
 
 	model = glm::mat4(1.0f);
-	model = glm::translate(model, glm::vec3(position, 0.0f));
-	model = glm::translate(model, glm::vec3(0.5f * scale.x, 0.5f * scale.y, 0.0f)); // Center the origin before rotation
+	model = glm::translate(model, glm::vec3(position, zOrder));
+	model = glm::translate(model, glm::vec3(0.5f * scale.x, 0.5f * scale.y, zOrder)); // Center the origin before rotation
 	model = glm::rotate(model, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
-	model = glm::translate(model, glm::vec3(-0.5f * scale.x, -0.5f * scale.y, 0.0f)); // Revert centering the origin
+	model = glm::translate(model, glm::vec3(-0.5f * scale.x, -0.5f * scale.y, zOrder)); // Revert centering the origin
 	model = glm::scale(model, glm::vec3(scale, 1.0f));
 
 	glBindVertexArray(vao);
@@ -69,6 +70,11 @@ void Sprite::SetColor(glm::vec3 newColor)
 void Sprite::Rotate(GLfloat newRotation)
 {
 	rotation = newRotation;
+}
+
+glm::vec2 Sprite::GetPosition()
+{
+	return position;
 }
 
 void Sprite::InitRenderData()

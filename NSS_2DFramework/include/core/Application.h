@@ -8,6 +8,7 @@
 #include "gtc/matrix_transform.hpp"
 
 #include "Window.h"
+#include "Camera2D.h"
 
 #include "renderer/Shader.h"
 #include "renderer/Sprite.h"
@@ -25,6 +26,9 @@ public:
 
 private:
 	Window window;
+	Camera2D camera;
+
+	Sprite* gameBoard;
 
 	std::vector<std::vector<Sprite*>> test;
 };
