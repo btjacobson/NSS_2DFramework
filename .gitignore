@@ -58,3 +58,5 @@ libs/freetype-2.12.1/builds
 *MAIN.ipch
 *WINDOW.ipch
 *.ipch
+.vs/NSS_2DFramework/v17/ipch/AutoPCH/8c1af53d9262246f/MAIN.ipch
+.vs/NSS_2DFramework/v17/ipch/AutoPCH/3cd0fb589336623a/WINDOW.ipch
