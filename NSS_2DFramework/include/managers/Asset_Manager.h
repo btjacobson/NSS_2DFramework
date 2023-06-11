@@ -5,6 +5,9 @@
 #include <mutex>
 #include <string>
 
+#include "ft2build.h"
+#include FT_FREETYPE_H
+
 #include "renderer/Texture2D.h"
 #include "renderer/Shader.h"
 

@@ -36,6 +36,7 @@ doc/
 docs/
 tests/
 ipch/
+libs/freetype-2.12.1/builds
 *.tlog
 *.log
 *.ilk
@@ -53,4 +54,7 @@ ipch/
 *.opendb
 *.ipch
 *.ipch
-.vs/NSS_2DFramework/v17/ipch/AutoPCH/8c1af53d9262246f/MAIN.ipch
+*README*
+*MAIN.ipch
+*WINDOW.ipch
+*.ipch
