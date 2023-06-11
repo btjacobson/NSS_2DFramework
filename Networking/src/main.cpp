@@ -93,6 +93,40 @@ int main()
 		return 1;
 	}
 
+	printf("Client has connected...\n");
+	char addressBuffer[100];
+	getnameinfo((struct sockaddr*)&clientAddress, clientLen, addressBuffer, sizeof(addressBuffer), 0, 0, NI_NUMERICHOST);
+	printf("%s\n", addressBuffer);
+
+	printf("Reading request...\n");
+	char request[1024];
+	int bytesReceived = recv(socketClient, request, 1024, 0);
+	printf("Received %d bytes.\n", bytesReceived);
+	printf("%.*s", bytesReceived, request);
+
+	printf("Sending response...\n");
+	const char* response =
+		"HTTP/1.1 200 OK\r\n"
+		"Connection: close\r\n"
+		"Content-Type: text/plain\r\n\r\n"
+		"Local time is: ";
+	int bytesSent = send(socketClient, response, strlen(response), 0);
+	printf("Sent %d of %d bytes.\n", bytesSent, (int)strlen(response));
+
+	time_t timer;
+	time(&timer);
+	char timeMessage[26];
+	ctime_s(timeMessage, sizeof(timeMessage), &timer);
+	
+	bytesSent = send(socketClient, timeMessage, strlen(timeMessage), 0);
+	printf("Sent %d of %d bytes.\n", bytesSent, (int)strlen(timeMessage));
+
+	printf("Closing connection...\n");
+	CLOSESOCKET(socketClient);
+
+	printf("Closing listening socket...\n");
+	CLOSESOCKET(socketListen);
+		
 #if defined(_WIN32)
 	WSACleanup();
 #endif
