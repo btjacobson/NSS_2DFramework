@@ -3,8 +3,8 @@
 Camera2D::Camera2D(int screenWidth, int screenHeight) : position(0.0f, 0.0f), zoom(1.0f),
     screenWidth(screenWidth), screenHeight(screenHeight)
 {
-    projection = glm::ortho(0.0f, static_cast<float>(screenWidth) / 8.0f, 
-        0.0f, static_cast<float>(screenHeight) / 8.0f, -1.0f, 1.0f);
+    projection = glm::ortho(0.0f, static_cast<float>(screenWidth), 
+        static_cast<float>(screenHeight), 0.0f, -1.0f, 1.0f);
 }
 
 void Camera2D::SetPosition(glm::vec2 newPosition)

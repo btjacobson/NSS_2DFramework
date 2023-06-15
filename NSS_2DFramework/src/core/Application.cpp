@@ -64,8 +64,8 @@ Application::Application(int width, int height, const char* title) :
 		test.push_back(vec);
 	}
 
-	camera.SetZoom(2.0f);
-	camera.SetPosition(gameBoard->GetPosition());
+	camera.SetZoom(50.0f);
+	camera.SetPosition(glm::vec2(-25.0f, -25.0f));
 }
 
 Application::~Application()
