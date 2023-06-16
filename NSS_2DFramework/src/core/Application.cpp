@@ -4,7 +4,7 @@
 
 Application::Application(int width, int height, const char* title, float frameRate) : 
 	window(width, height, title), desiredFrameRate(1.0f / frameRate), lastFrameTime(0.0f), 
-	currentFrameTime(0.0f), deltaTime(0.0f), debugMode(false)
+	currentFrameTime(0.0f), deltaTime(0.0f)
 {
 	State_Manager::GetInstance()->ChangeState(new Intro_State());
 }
@@ -28,17 +28,6 @@ void Application::HandleInput()
 {
 	window.HandleInput();
 	State_Manager::GetInstance()->HandleInput();
-
-	if (KeyboardListener::GetInstance()->IsKeyPressed(GLFW_KEY_F1))
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		debugMode = true;
-	}
-	else if (KeyboardListener::GetInstance()->IsKeyPressed(GLFW_KEY_F2))
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		debugMode = false;
-	}
 }
 
 void Application::Update()

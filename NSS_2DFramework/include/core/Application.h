@@ -9,8 +9,6 @@
 
 #include "states/Intro_State.h"
 
-#include <chrono>
-
 class Application
 {
 public:
@@ -30,7 +28,6 @@ private:
 	float lastFrameTime;
 	float currentFrameTime;
 	float deltaTime;
-	bool debugMode;
 };
 
 #endif
