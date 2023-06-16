@@ -85,3 +85,8 @@ void State_Manager::Update(float deltaTime)
 {
 	states.back()->Update(deltaTime);
 }
+
+void State_Manager::Draw()
+{
+	states.back()->Draw();
+}

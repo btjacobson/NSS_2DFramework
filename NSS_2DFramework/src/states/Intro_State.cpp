@@ -36,3 +36,8 @@ void Intro_State::Update(float deltaTime)
 {
 
 }
+
+void Intro_State::Draw()
+{
+
+}

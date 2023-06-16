@@ -34,3 +34,8 @@ void Credits_State::Update(float deltaTime)
 {
 
 }
+
+void Credits_State::Draw()
+{
+
+}

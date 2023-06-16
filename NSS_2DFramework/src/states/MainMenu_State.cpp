@@ -34,3 +34,8 @@ void MainMenu_State::Update(float deltaTime)
 {
 
 }
+
+void MainMenu_State::Draw()
+{
+
+}

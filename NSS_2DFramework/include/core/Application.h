@@ -18,12 +18,18 @@ public:
 	~Application();
 
 	void Run();
+
 	void HandleInput();
+	void Update();
+	void Draw();
 
 private:
 	Window window;
 
 	float desiredFrameRate;
+	float lastFrameTime;
+	float currentFrameTime;
+	float deltaTime;
 	bool debugMode;
 };
 

@@ -21,6 +21,7 @@ public:
 
 	void HandleInput();
 	void Update(float deltaTime);
+	void Draw();
 
 protected:
 	static State_Manager* instance;

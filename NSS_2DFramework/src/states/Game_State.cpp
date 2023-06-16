@@ -35,3 +35,8 @@ void Game_State::Update(float deltaTime)
 {
 
 }
+
+void Game_State::Draw()
+{
+
+}
