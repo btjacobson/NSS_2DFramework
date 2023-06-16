@@ -31,7 +31,7 @@ void Game_State::HandleInput()
 
 }
 
-void Game_State::Update()
+void Game_State::Update(float deltaTime)
 {
 
 }

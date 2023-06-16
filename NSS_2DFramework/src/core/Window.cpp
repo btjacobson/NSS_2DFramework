@@ -79,6 +79,8 @@ int Window::Init()
 
     SetupCallbacks();
 
+    glfwSwapInterval(ON);
+
     glfwMakeContextCurrent(window);
 
     glewExperimental = GL_TRUE;

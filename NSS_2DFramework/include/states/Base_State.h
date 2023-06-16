@@ -11,7 +11,7 @@ public:
 	virtual void Resume() = 0;
 
 	virtual void HandleInput() = 0;
-	virtual void Update() = 0;
+	virtual void Update(float deltaTime) = 0;
 
 protected:
 	Base_State() {}

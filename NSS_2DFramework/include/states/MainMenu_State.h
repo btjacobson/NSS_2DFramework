@@ -15,7 +15,7 @@ public:
 	void Resume();
 
 	void HandleInput();
-	void Update();
+	void Update(float deltaTime);
 };
 
 #endif

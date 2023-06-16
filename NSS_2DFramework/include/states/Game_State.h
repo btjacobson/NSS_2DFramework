@@ -16,7 +16,7 @@ public:
 	void Resume();
 
 	void HandleInput();
-	void Update();
+	void Update(float deltaTime);
 
 private:
 	Camera2D camera;

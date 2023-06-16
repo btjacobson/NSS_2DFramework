@@ -20,7 +20,7 @@ public:
 	void PopState();
 
 	void HandleInput();
-	void Update();
+	void Update(float deltaTime);
 
 protected:
 	static State_Manager* instance;

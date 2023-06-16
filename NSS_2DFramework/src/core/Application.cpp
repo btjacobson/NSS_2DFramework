@@ -2,7 +2,8 @@
 
 #include <windows.h>
 
-Application::Application(int width, int height, const char* title) : window(width, height, title), debugMode(false)
+Application::Application(int width, int height, const char* title, float frameRate) : 
+	window(width, height, title), debugMode(false), desiredFrameRate(1.0f / frameRate)
 {
 	State_Manager::GetInstance()->ChangeState(new Intro_State());
 }
@@ -14,12 +15,24 @@ Application::~Application()
 
 void Application::Run()
 {
+	std::chrono::time_point lastFrameTime = std::chrono::high_resolution_clock::now();
+	std::chrono::time_point currentTime = lastFrameTime;
+	std::chrono::duration<float> deltaTime = lastFrameTime - currentTime;
+	float dt;
+	float totalTime = 0.0f;
+	float averageFrameRate = 0.0f;
+	int frameCount = 0;
+
 	while (!window.ShouldClose())
 	{
+		currentTime = std::chrono::high_resolution_clock::now();
+		deltaTime = currentTime - lastFrameTime;
+		dt = deltaTime.count();
+
 		HandleInput();
 		window.Clear();
 
-		State_Manager::GetInstance()->Update();
+		State_Manager::GetInstance()->Update(dt);
 
 		window.Display();
 
@@ -29,6 +42,25 @@ void Application::Run()
 		}
 
 		MouseListener::GetInstance()->Update();
+
+		if (dt >= desiredFrameRate)
+		{
+			lastFrameTime = currentTime;
+
+			std::this_thread::sleep_for(std::chrono::duration<float>(desiredFrameRate - dt));
+
+			frameCount++;
+			totalTime += dt;
+
+			if (totalTime >= 1.0f)
+			{
+				averageFrameRate = frameCount / totalTime;
+				std::cout << "Average frame rate: " << averageFrameRate << std::endl;
+
+				frameCount = 0;
+				totalTime = 0.0f;
+			}
+		}
 	}
 }
 

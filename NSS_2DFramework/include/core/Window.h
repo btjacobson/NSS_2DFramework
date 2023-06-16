@@ -9,6 +9,12 @@
 #include "listeners/MouseListener.h"
 #include "listeners/KeyboardListener.h"
 
+enum VSync
+{
+	OFF = 0,
+	ON = 1
+};
+
 class Window
 {
 public:
@@ -29,6 +35,7 @@ private:
 
 	int width;
 	int height;
+	VSync vsync;
 	const char* title;
 
 	GLFWwindow* window;

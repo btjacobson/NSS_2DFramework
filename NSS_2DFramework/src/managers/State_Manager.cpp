@@ -81,7 +81,7 @@ void State_Manager::HandleInput()
 	states.back()->HandleInput();
 }
 
-void State_Manager::Update()
+void State_Manager::Update(float deltaTime)
 {
-	states.back()->Update();
+	states.back()->Update(deltaTime);
 }

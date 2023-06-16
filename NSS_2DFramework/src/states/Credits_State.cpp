@@ -30,7 +30,7 @@ void Credits_State::HandleInput()
 
 }
 
-void Credits_State::Update()
+void Credits_State::Update(float deltaTime)
 {
 
 }

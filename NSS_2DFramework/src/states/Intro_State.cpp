@@ -32,7 +32,7 @@ void Intro_State::HandleInput()
 
 }
 
-void Intro_State::Update()
+void Intro_State::Update(float deltaTime)
 {
 
 }

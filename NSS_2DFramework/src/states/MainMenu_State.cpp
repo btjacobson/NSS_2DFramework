@@ -30,7 +30,7 @@ void MainMenu_State::HandleInput()
 
 }
 
-void MainMenu_State::Update()
+void MainMenu_State::Update(float deltaTime)
 {
 
 }
