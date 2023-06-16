@@ -1,8 +1,9 @@
 #include "states/Game_State.h"
 
-Game_State::Game_State()
+Game_State::Game_State() : camera(800, 600)
 {
-
+	camera.SetZoom(50.0f);
+	camera.SetPosition(glm::vec2(-25.0f, -25.0f));
 }
 
 void Game_State::Init()
