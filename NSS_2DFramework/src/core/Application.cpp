@@ -23,6 +23,8 @@ void Application::Run()
 		HandleInput();
 		window.Clear();
 
+		State_Manager::GetInstance()->Update();
+
 		window.Display();
 		std::cout << MouseListener::GetInstance()->GetX() << "," << MouseListener::GetInstance()->GetY() << std::endl;
 		MouseListener::GetInstance()->Update();
@@ -32,6 +34,7 @@ void Application::Run()
 void Application::HandleInput()
 {
 	window.HandleInput();
+	State_Manager::GetInstance()->HandleInput();
 
 	if (KeyboardListener::GetInstance()->IsKeyPressed(GLFW_KEY_F1))
 	{

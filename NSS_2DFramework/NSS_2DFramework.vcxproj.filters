@@ -51,9 +51,6 @@
     <ClCompile Include="src\managers\Asset_Manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\states\Base_State.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\states\MainMenu_State.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

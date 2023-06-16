@@ -144,7 +144,6 @@
     <ClCompile Include="src\renderer\Sprite.cpp" />
     <ClCompile Include="src\renderer\BatchRenderer.cpp" />
     <ClCompile Include="src\renderer\SpriteSheet.cpp" />
-    <ClCompile Include="src\states\Base_State.cpp" />
     <ClCompile Include="src\states\Credits_State.cpp" />
     <ClCompile Include="src\states\Game_State.cpp" />
     <ClCompile Include="src\states\Intro_State.cpp" />

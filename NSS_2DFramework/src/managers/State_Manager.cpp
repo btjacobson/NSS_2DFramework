@@ -1,6 +1,7 @@
 #include "managers/State_Manager.h"
 
 State_Manager* State_Manager::instance = nullptr;
+std::mutex State_Manager::mutex;
 
 State_Manager::State_Manager()
 {
@@ -20,11 +21,20 @@ State_Manager::~State_Manager()
 
 State_Manager* State_Manager::GetInstance()
 {
-	return nullptr;
+	std::lock_guard<std::mutex> lock(mutex);
+
+	if (instance == nullptr)
+	{
+		instance = new State_Manager();
+	}
+
+	return instance;
 }
 
 void State_Manager::ChangeState(Base_State* state)
 {
+	std::lock_guard<std::mutex> lock(mutex);
+
 	if (!states.empty())
 	{
 		states.back()->Cleanup();
@@ -38,6 +48,8 @@ void State_Manager::ChangeState(Base_State* state)
 
 void State_Manager::PushState(Base_State* state)
 {
+	std::lock_guard<std::mutex> lock(mutex);
+
 	if (!states.empty())
 	{
 		states.back()->Pause();
@@ -49,6 +61,8 @@ void State_Manager::PushState(Base_State* state)
 
 void State_Manager::PopState()
 {
+	std::lock_guard<std::mutex> lock(mutex);
+
 	if (!states.empty())
 	{
 		states.back()->Cleanup();

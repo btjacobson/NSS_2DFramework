@@ -2,6 +2,7 @@
 #define STATE_MANAGER_H
 
 #include <vector>
+#include <mutex>
 
 #include "states/Base_state.h"
 
@@ -23,6 +24,7 @@ public:
 
 protected:
 	static State_Manager* instance;
+	static std::mutex mutex;
 
 	State_Manager();
 	~State_Manager();
