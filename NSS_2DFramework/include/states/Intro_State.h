@@ -6,9 +6,16 @@
 class Intro_State : public Base_State
 {
 public:
+	Intro_State();
 
-private:
+	void Init();
+	void Cleanup();
 
+	void Pause();
+	void Resume();
+
+	void HandleInput();
+	void Update();
 };
 
 #endif

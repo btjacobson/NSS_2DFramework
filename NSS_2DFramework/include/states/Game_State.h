@@ -6,9 +6,16 @@
 class Game_State : public Base_State
 {
 public:
+	Game_State();
 
-private:
+	void Init();
+	void Cleanup();
 
+	void Pause();
+	void Resume();
+
+	void HandleInput();
+	void Update();
 };
 
 #endif

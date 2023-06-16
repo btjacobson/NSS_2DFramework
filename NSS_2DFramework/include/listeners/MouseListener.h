@@ -11,7 +11,7 @@ public:
 	static void MousePositionCallback(GLFWwindow* window, double xPos, double yPos);
 	static void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 	static void MouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset);
-	static void EndFrame();
+	static void Update();
 
 	static float GetX();
 	static float GetY();

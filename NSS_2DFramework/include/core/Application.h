@@ -13,7 +13,12 @@
 #include "renderer/Shader.h"
 #include "renderer/Sprite.h"
 #include "renderer/Texture2D.h"
+
 #include "managers/Asset_Manager.h"
+#include "managers/Entity_Manager.h"
+#include "managers/State_Manager.h"
+
+#include "states/Intro_State.h"
 
 class Application
 {
@@ -27,10 +32,6 @@ public:
 private:
 	Window window;
 	Camera2D camera;
-
-	Sprite* gameBoard;
-
-	std::vector<std::vector<Sprite*>> test;
 };
 
 #endif

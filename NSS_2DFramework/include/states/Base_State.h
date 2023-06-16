@@ -4,9 +4,17 @@
 class Base_State
 {
 public:
+	virtual void Init() = 0;
+	virtual void Cleanup() = 0;
 
-private:
+	virtual void Pause() = 0;
+	virtual void Resume() = 0;
 
+	virtual void HandleInput() = 0;
+	virtual void Update() = 0;
+
+protected:
+	Base_State() {}
 };
 
 #endif
