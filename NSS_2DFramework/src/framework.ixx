@@ -1,3 +1,11 @@
+/* Holds all module partitions for building the game engine. Naming scheme is:
+*  framework:[namespace].[class]
+*  Cyclic includes force each "namespace" to be in the same module file, refactoring
+*  would fix this, but this was intended to match original design.
+* 
+*  If cyclic dependencies could be solved, ideally each "namespace" would be a single
+*  module.
+*/
 export module framework;
 
 // Core partitions
