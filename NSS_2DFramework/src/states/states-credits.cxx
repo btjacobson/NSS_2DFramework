@@ -1,4 +1,23 @@
-#include "states/Credits_State.h"
+module;
+export module framework:states.credits;
+
+import :states.base;
+
+export class Credits_State : public Base_State
+{
+public:
+	Credits_State();
+
+	void Init();
+	void Cleanup();
+
+	void Pause();
+	void Resume();
+
+	void HandleInput();
+	void Update(float deltaTime);
+	void Draw();
+};
 
 Credits_State::Credits_State()
 {

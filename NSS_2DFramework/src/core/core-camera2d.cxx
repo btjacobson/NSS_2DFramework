@@ -1,4 +1,31 @@
-#include "core/Camera2D.h"
+module;
+
+#include "glm.hpp"
+#include "gtc/type_ptr.hpp"
+#include "gtc/matrix_transform.hpp"
+
+export module framework:core.camera2d;
+
+export class Camera2D
+{
+public:
+    Camera2D(int screenWidth, int screenHeight);
+
+    void SetPosition(glm::vec2 newPosition);
+    void SetZoom(float newZoom);
+
+    glm::mat4& GetProjectionMatrix();
+    glm::mat4& GetViewMatrix();
+
+private:
+    glm::vec2 position;
+    glm::mat4 projection;
+    glm::mat4 view;
+
+    float zoom;
+    int screenWidth;
+    int screenHeight;
+};
 
 Camera2D::Camera2D(int screenWidth, int screenHeight) : position(0.0f, 0.0f), zoom(1.0f),
     screenWidth(screenWidth), screenHeight(screenHeight)

@@ -18,119 +18,66 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Window.cpp">
+    <ClCompile Include="src\core\core-window.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer\Shader.cpp">
+    <ClCompile Include="src\renderer\renderer-shader.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\listeners\MouseListener.cpp">
+    <ClCompile Include="src\listeners\listeners-mouse.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\listeners\KeyboardListener.cpp">
+    <ClCompile Include="src\listeners\listeners-keyboard.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\core\Application.h">
+    <ClCompile Include="src\core\core-application.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Application.cpp">
+    <ClCompile Include="src\renderer\renderer-texture2d.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer\Texture2D.cpp">
+    <ClCompile Include="src\renderer\renderer-sprite.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer\Sprite.cpp">
+    <ClCompile Include="src\renderer\renderer-batch.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer\BatchRenderer.cpp">
+    <ClCompile Include="src\renderer\renderer-spritesheet.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer\SpriteSheet.cpp">
+    <ClCompile Include="src\managers\managers-asset.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\managers\Asset_Manager.cpp">
+    <ClCompile Include="src\states\states-mainmenu.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\states\MainMenu_State.cpp">
+    <ClCompile Include="src\states\states-intro.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\states\Intro_State.cpp">
+    <ClCompile Include="src\states\states-game.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\states\Game_State.h">
+    <ClCompile Include="src\managers\managers-state.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\states\Game_State.cpp">
+    <ClCompile Include="src\managers\managers-entity.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\managers\State_Manager.cpp">
+    <ClCompile Include="src\states\states-credits.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\managers\Entity_Manager.cpp">
+    <ClCompile Include="src\core\core-entity.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\states\Credits_State.cpp">
+    <ClCompile Include="src\core\core-camera2d.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Entity.cpp">
+    <ClCompile Include="src\framework.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Camera2D.cpp">
+    <ClCompile Include="src\states\states-base.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\core\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\renderer\Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\listeners\MouseListener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\listeners\KeyboardListener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\renderer\BatchRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\renderer\Sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\renderer\Texture2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\renderer\SpriteSheet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\managers\Asset_Manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\states\Base_State.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\states\MainMenu_State.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\states\Intro_State.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\managers\State_Manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\managers\Entity_Manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\states\Credits_State.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\core\Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\core\Camera2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\base_shader.vert" />

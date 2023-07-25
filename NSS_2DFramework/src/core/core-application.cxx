@@ -1,6 +1,34 @@
-#include "core/Application.h"
+module;
+#include <GLFW/glfw3.h>
+export module framework:core.application;
 
-#include <windows.h>
+import :core.window;
+import :listeners.keyboard;
+import :listeners.mouse;
+import :states.intro;
+import :managers.state;
+
+export class Application
+{
+public:
+	Application(int width, int height, const char* title, float frameRate);
+	~Application();
+
+	void Run();
+
+	void HandleInput();
+	void Update();
+	void Draw();
+
+private:
+	Window window;
+
+	float desiredFrameRate;
+	float lastFrameTime;
+	float currentFrameTime;
+	float deltaTime;
+};
+
 
 Application::Application(int width, int height, const char* title, float frameRate) : 
 	window(width, height, title), desiredFrameRate(1.0f / frameRate), lastFrameTime(0.0f), 

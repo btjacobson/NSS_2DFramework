@@ -1,4 +1,24 @@
-#include "listeners/KeyboardListener.h"
+module;
+#include "GLFW/glfw3.h"
+export module framework:listeners.keyboard;
+
+export class KeyboardListener
+{
+public:
+    static KeyboardListener* GetInstance();
+
+    static void KeyCallback(GLFWwindow* window, int key, int scanCode, int action, int mod);
+
+    static bool IsKeyPressed(int key);
+
+private:
+    KeyboardListener();
+    ~KeyboardListener();
+
+    static KeyboardListener* instance;
+
+    bool keyPressed[350];
+};
 
 KeyboardListener* KeyboardListener::instance = new KeyboardListener();
 

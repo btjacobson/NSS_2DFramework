@@ -1,6 +1,29 @@
-#include "renderer/Texture2D.h"
-
+module;
+#include "GL/glew.h"
 #include "stb_image.h"
+#include <iostream>
+export module framework:renderer.texture2d;
+
+export class Texture2D
+{
+public:
+	Texture2D(const char* filepath);
+
+	void Generate(const char* filepath);
+	void Bind();
+	void Unbind();
+
+private:
+	GLuint id;
+	GLuint wrapS;
+	GLuint wrapT;
+	GLuint filterMin;
+	GLuint filterMax;
+
+	int width;
+	int height;
+	int channels;
+};
 
 Texture2D::Texture2D(const char* filepath) :
 	wrapS(GL_REPEAT), wrapT(GL_REPEAT), filterMin(GL_NEAREST), filterMax(GL_NEAREST)

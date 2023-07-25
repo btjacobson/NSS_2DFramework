@@ -37,6 +37,7 @@ docs/
 tests/
 ipch/
 .vs/
+x64/
 libs/freetype-2.12.1/builds
 *.tlog
 *.log

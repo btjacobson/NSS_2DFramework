@@ -1,7 +1,8 @@
-#ifndef BASE_STATE_H
-#define BASE_STATE_H
+module;
 
-class Base_State
+export module framework:states.base;
+
+export class Base_State
 {
 public:
 	virtual void Init() = 0;
@@ -17,5 +18,3 @@ public:
 protected:
 	Base_State() {}
 };
-
-#endif

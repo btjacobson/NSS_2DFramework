@@ -1,6 +1,24 @@
-#include "states/Intro_State.h"
-
+module;
 #include <iostream>
+export module framework:states.intro;
+
+import :states.base;
+
+export class Intro_State : public Base_State
+{
+public:
+	Intro_State();
+
+	void Init();
+	void Cleanup();
+
+	void Pause();
+	void Resume();
+
+	void HandleInput();
+	void Update(float deltaTime);
+	void Draw();
+};
 
 Intro_State::Intro_State()
 {

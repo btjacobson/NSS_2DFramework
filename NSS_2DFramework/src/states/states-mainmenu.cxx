@@ -1,4 +1,24 @@
-#include "states/MainMenu_State.h"
+module;
+
+export module framework:states.mainmenu;
+
+import :states.base;
+
+export class MainMenu_State : public Base_State
+{
+public:
+	MainMenu_State();
+
+	void Init();
+	void Cleanup();
+
+	void Pause();
+	void Resume();
+
+	void HandleInput();
+	void Update(float deltaTime);
+	void Draw();
+};
 
 MainMenu_State::MainMenu_State()
 {

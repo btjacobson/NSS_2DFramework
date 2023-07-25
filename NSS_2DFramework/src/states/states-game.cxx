@@ -1,4 +1,28 @@
-#include "states/Game_State.h"
+module;
+#include <glm.hpp>
+export module framework:states.game;
+
+import :states.base;
+import :core.camera2d;
+
+export class Game_State : public Base_State
+{
+public:
+	Game_State();
+
+	void Init();
+	void Cleanup();
+
+	void Pause();
+	void Resume();
+
+	void HandleInput();
+	void Update(float deltaTime);
+	void Draw();
+
+private:
+	Camera2D camera;
+};
 
 Game_State::Game_State() : camera(800, 600)
 {

@@ -1,4 +1,48 @@
-#include "renderer/Sprite.h"
+module;
+#include "GL/glew.h"
+#include "glm.hpp"
+#include "gtc/type_ptr.hpp"
+#include "gtc/matrix_transform.hpp"
+export module framework:renderer.sprite;
+
+import :renderer.texture2d;
+import :renderer.shader;
+
+export class Sprite
+{
+public:
+	Sprite(Texture2D* newTexture, Shader* newShader, glm::vec2 newPosition, GLuint newZOrder = 0.0f,
+		glm::vec2 newScale = glm::vec2(1.0f, 1.0f), glm::vec3 newColor = glm::vec3(1.0f, 1.0f, 1.0f),
+		GLfloat newRotation = 0.0f);
+	~Sprite();
+
+	void Draw(glm::mat4& projection, glm::mat4& view);
+	void Update();
+
+	void SetTexture(Texture2D* newTexture);
+	void SetShader(Shader* newShader);
+	void SetPosition(glm::vec2 newPosition);
+	void SetScale(glm::vec2 newScale);
+	void SetColor(glm::vec3 newColor);
+	void Rotate(GLfloat newRotation);
+
+	glm::vec2 GetPosition();
+
+private:
+	void InitRenderData();
+
+	Texture2D* texture;
+	Shader* shader;
+
+	glm::vec2 position;
+	glm::vec2 scale;
+	glm::vec3 color;
+	glm::mat4 model;
+
+	GLfloat rotation;
+	GLuint vao;
+	GLuint zOrder;
+};
 
 Sprite::Sprite(Texture2D* newTexture, Shader* newShader, glm::vec2 newPosition, GLuint newZOrder, glm::vec2 newScale, glm::vec3 newColor, GLfloat newRotation) :
 	texture(newTexture), shader(newShader), position(newPosition), zOrder(newZOrder), scale(newScale),

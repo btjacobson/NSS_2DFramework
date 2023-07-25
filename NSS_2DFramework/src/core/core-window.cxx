@@ -1,20 +1,62 @@
-#include "core/Window.h"
-#include "listeners/MouseListener.h"
-#include "listeners/KeyboardListener.h"
+module;
+
+#include "GL/glew.h"
+#include "GLFW/glfw3.h"
+#include "iostream"
+
+export module framework:core.window;
+
+
+import :listeners.keyboard;
+import :listeners.mouse;
+
+export enum VSync
+{
+    OFF = 0,
+    ON = 1
+};
+
+export class Window
+{
+public:
+    Window(int width, int height, const char* title);
+    ~Window();
+
+    bool ShouldClose();
+    int GetWidth();
+    int GetHeight();
+
+    void Clear();
+    void HandleInput();
+    void Display();
+    void SetupCallbacks();
+
+private:
+    int Init();
+
+    int width;
+    int height;
+    VSync vsync;
+    const char* title;
+
+    GLFWwindow* window;
+};
+
+
 
 Window::Window(int width, int height, const char* title)
 {
-	this->width = width;
-	this->height = height;
-	this->title = title;
-	this->window = nullptr;
+    this->width = width;
+    this->height = height;
+    this->title = title;
+    this->window = nullptr;
 
-	Init();
+    Init();
 }
 
 Window::~Window()
 {
-	glfwDestroyWindow(window);
+    glfwDestroyWindow(window);
 }
 
 bool Window::ShouldClose()
@@ -40,12 +82,12 @@ void Window::Clear()
 
 void Window::HandleInput()
 {
-	glfwPollEvents();
+    glfwPollEvents();
 }
 
 void Window::Display()
 {
-	glfwSwapBuffers(window);
+    glfwSwapBuffers(window);
 }
 
 void Window::SetupCallbacks()
