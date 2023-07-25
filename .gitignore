@@ -59,3 +59,4 @@ libs/freetype-2.12.1/builds
 *MAIN.ipch
 *WINDOW.ipch
 *.ipch
+*.recipe
