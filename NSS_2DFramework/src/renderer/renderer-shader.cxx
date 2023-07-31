@@ -38,9 +38,6 @@ private:
 	GLuint program;
 };
 
-/*
-	TODO: Port file managing over to std::filesystem.
-*/
 
 Shader::Shader(const char* vertexFilePath, const char* fragmentFilePath)
 {
