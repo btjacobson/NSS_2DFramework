@@ -1,7 +1,8 @@
 module;
 #include <GLFW/glfw3.h>
-#include <memory>
 export module framework:core.application;
+
+import <memory>;
 
 import :core.window;
 import :listeners.keyboard;

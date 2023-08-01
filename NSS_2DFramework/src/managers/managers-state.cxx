@@ -1,8 +1,10 @@
 module;
-#include <vector>
-#include <mutex>
-#include <memory>
+
 export module framework:managers.state;
+
+import <vector>;
+import <mutex>;
+import <memory>;
 
 import :states.base;
 

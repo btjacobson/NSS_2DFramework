@@ -4,13 +4,14 @@ module;
 #include <glm.hpp>
 #include <gtc/type_ptr.hpp>
 #include <fstream>
-#include <vector>
 #include <iostream>
-#include <string>
-#include <filesystem>
 export module framework:renderer.shader;
 
+import <filesystem>;
 import <compare>;
+import <string>;
+import <vector>;
+
 
 export class Shader
 {

@@ -1,14 +1,14 @@
 module;
 #include "ft2build.h"
 #include FT_FREETYPE_H
-#include <unordered_map>
-#include <mutex>
-#include <string>
-#include <filesystem>
-#include <ranges>
 #include <iostream>
 export module framework:managers.asset;
 
+import <unordered_map>;
+import <mutex>;
+import <string>;
+import <filesystem>;
+import <ranges>;
 import <compare>;
 
 import :renderer.texture2d;

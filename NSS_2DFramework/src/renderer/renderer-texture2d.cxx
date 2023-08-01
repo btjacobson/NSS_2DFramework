@@ -2,9 +2,9 @@ module;
 #include "GL/glew.h"
 #include "stb_image.h"
 #include <iostream>
-#include <filesystem>
 export module framework:renderer.texture2d;
 
+import <filesystem>;
 import <compare>;
 
 export class Texture2D
