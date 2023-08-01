@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -105,12 +105,13 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)include;%(ProjectDir)..\libs\freetype-2.12.1\include;$(ProjectDir)..\libs\stb-master;$(ProjectDir)..\libs\glm\glm;$(ProjectDir)..\libs\glfw-3.3.8 x64\include;$(ProjectDir)..\libs\glew-2.1.0 x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalBMIDirectories>$(IntDir)</AdditionalBMIDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\libs\glfw-3.3.8 x64\lib-vc2022;$(ProjectDir)..\libs\glew-2.1.0 x64\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\libs\glfw-3.3.8 x64\lib-vc2022;$(ProjectDir)..\libs\glew-2.1.0 x64\lib\Release\x64;$(ProjectDir)..\libs\glew-2.1.0 x64\bin\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -135,46 +136,65 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\core\Camera2D.cpp" />
-    <ClCompile Include="include\states\Game_State.h" />
-    <ClCompile Include="src\core\Entity.cpp" />
-    <ClCompile Include="src\managers\Asset_Manager.cpp" />
-    <ClCompile Include="src\managers\Entity_Manager.cpp" />
-    <ClCompile Include="src\managers\State_Manager.cpp" />
-    <ClCompile Include="src\renderer\Sprite.cpp" />
-    <ClCompile Include="src\renderer\BatchRenderer.cpp" />
-    <ClCompile Include="src\renderer\SpriteSheet.cpp" />
-    <ClCompile Include="src\states\Credits_State.cpp" />
-    <ClCompile Include="src\states\Game_State.cpp" />
-    <ClCompile Include="src\states\Intro_State.cpp" />
-    <ClCompile Include="src\states\MainMenu_State.cpp" />
-    <ClCompile Include="src\renderer\Texture2D.cpp" />
-    <ClCompile Include="src\core\Application.cpp" />
-    <ClCompile Include="include\core\Application.h" />
-    <ClCompile Include="src\listeners\KeyboardListener.cpp" />
+    <ClCompile Include="src\core\core-camera2d.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\core\core-entity.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\framework.ixx" />
+    <ClCompile Include="src\managers\managers-asset.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\managers\managers-entity.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\managers\managers-state.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\renderer\renderer-sprite.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\renderer\renderer-batch.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\renderer\renderer-spritesheet.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\states\states-base.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\states\states-credits.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\states\states-game.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\states\states-intro.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\states\states-mainmenu.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\renderer\renderer-texture2d.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\core\core-application.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\listeners\listeners-keyboard.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\listeners\MouseListener.cpp" />
-    <ClCompile Include="src\renderer\Shader.cpp" />
-    <ClCompile Include="src\core\Window.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\core\Camera2D.h" />
-    <ClInclude Include="include\core\Entity.h" />
-    <ClInclude Include="include\managers\Asset_Manager.h" />
-    <ClInclude Include="include\managers\Entity_Manager.h" />
-    <ClInclude Include="include\managers\State_Manager.h" />
-    <ClInclude Include="include\states\Base_State.h" />
-    <ClInclude Include="include\listeners\KeyboardListener.h" />
-    <ClInclude Include="include\listeners\MouseListener.h" />
-    <ClInclude Include="include\renderer\Shader.h" />
-    <ClInclude Include="include\renderer\Sprite.h" />
-    <ClInclude Include="include\renderer\BatchRenderer.h" />
-    <ClInclude Include="include\renderer\SpriteSheet.h" />
-    <ClInclude Include="include\states\Credits_State.h" />
-    <ClInclude Include="include\states\Intro_State.h" />
-    <ClInclude Include="include\states\MainMenu_State.h" />
-    <ClInclude Include="include\renderer\Texture2D.h" />
-    <ClInclude Include="include\core\Window.h" />
+    <ClCompile Include="src\listeners\listeners-mouse.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\renderer\renderer-shader.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\core\core-window.cxx">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModuleInternalPartition</CompileAs>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\base_shader.frag" />
