@@ -1,5 +1,6 @@
 module;
 #include <GLFW/glfw3.h>
+#include <memory>
 export module framework:core.application;
 
 import :core.window;
@@ -7,6 +8,7 @@ import :listeners.keyboard;
 import :listeners.mouse;
 import :states.intro;
 import :managers.state;
+import :managers.asset;
 
 export class Application
 {
@@ -34,7 +36,8 @@ Application::Application(int width, int height, const char* title, float frameRa
 	window(width, height, title), desiredFrameRate(1.0f / frameRate), lastFrameTime(0.0f), 
 	currentFrameTime(0.0f), deltaTime(0.0f)
 {
-	State_Manager::GetInstance()->ChangeState(new Intro_State());
+	Asset_Manager::GetInstance()->LoadAllShaders("assets\\shaders");
+	State_Manager::GetInstance()->ChangeState(std::make_unique<Intro_State>());
 }
 
 Application::~Application()
@@ -60,7 +63,7 @@ void Application::HandleInput()
 
 void Application::Update()
 {
-	currentFrameTime = glfwGetTime();
+	currentFrameTime = static_cast<float>(glfwGetTime());
 	deltaTime = currentFrameTime - lastFrameTime;
 	lastFrameTime = currentFrameTime;
 

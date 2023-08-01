@@ -7,12 +7,15 @@ module;
 #include <vector>
 #include <iostream>
 #include <string>
+#include <filesystem>
 export module framework:renderer.shader;
+
+import <compare>;
 
 export class Shader
 {
 public:
-	Shader(const char* vertexFilePath, const char* fragmentFilePath);
+	Shader(const std::filesystem::path& vertexFilePath, const std::filesystem::path& fragmentFilePath);
 	~Shader();
 
 	void Use();
@@ -29,7 +32,7 @@ public:
 	GLuint GetProgramID();
 
 private:
-	void LoadFiles(const char* vertexFilePath, const char* fragmentFilePath);
+	void LoadFiles(const std::filesystem::path& vertexFilePath, const std::filesystem::path& fragmentFilePath);
 	void Create(const char* fileContents, GLenum shaderType);
 	void CompileAndLink();
 
@@ -38,11 +41,8 @@ private:
 	GLuint program;
 };
 
-/*
-	TODO: Port file managing over to std::filesystem.
-*/
 
-Shader::Shader(const char* vertexFilePath, const char* fragmentFilePath)
+Shader::Shader(const std::filesystem::path& vertexFilePath, const std::filesystem::path& fragmentFilePath)
 {
 	vertexShader = 0;
 	fragmentShader = 0;
@@ -156,7 +156,7 @@ GLuint Shader::GetProgramID()
 	return program;
 }
 
-void Shader::LoadFiles(const char* vertexFilePath, const char* fragmentFilePath)
+void Shader::LoadFiles(const std::filesystem::path& vertexFilePath, const std::filesystem::path& fragmentFilePath)
 {
 	std::string vertLine;
 	std::string vertContents;

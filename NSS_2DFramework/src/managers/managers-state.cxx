@@ -1,6 +1,7 @@
 module;
 #include <vector>
 #include <mutex>
+#include <memory>
 export module framework:managers.state;
 
 import :states.base;
@@ -13,9 +14,10 @@ public:
 	State_Manager(State_Manager& other) = delete;
 
 	void operator=(const State_Manager& other) = delete;
+	void operator=(const State_Manager&& other) = delete;
 
-	void ChangeState(Base_State* state);
-	void PushState(Base_State* state);
+	void ChangeState(std::unique_ptr<Base_State>&& state);
+	void PushState(std::unique_ptr<Base_State>&& state);
 	void PopState();
 
 	void HandleInput();
@@ -30,7 +32,7 @@ protected:
 	~State_Manager();
 
 private:
-	std::vector<Base_State*> states;
+	std::vector<std::unique_ptr<Base_State>> states;
 };
 
 State_Manager* State_Manager::instance = nullptr;
@@ -43,10 +45,9 @@ State_Manager::State_Manager()
 
 State_Manager::~State_Manager()
 {
-	for (auto state : states)
+	for (auto& state : states)
 	{
 		state->Cleanup();
-		delete state;
 	}
 
 	states.clear();
@@ -64,22 +65,21 @@ State_Manager* State_Manager::GetInstance()
 	return instance;
 }
 
-void State_Manager::ChangeState(Base_State* state)
+void State_Manager::ChangeState(std::unique_ptr<Base_State> &&state)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
 	if (!states.empty())
 	{
 		states.back()->Cleanup();
-		delete states.back();
 		states.pop_back();
 	}
 
-	states.push_back(state);
+	states.push_back(std::move(state));
 	states.back()->Init();
 }
 
-void State_Manager::PushState(Base_State* state)
+void State_Manager::PushState(std::unique_ptr<Base_State> &&state)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
@@ -88,7 +88,7 @@ void State_Manager::PushState(Base_State* state)
 		states.back()->Pause();
 	}
 
-	states.push_back(state);
+	states.push_back(std::move(state));
 	states.back()->Init();
 }
 
@@ -99,7 +99,6 @@ void State_Manager::PopState()
 	if (!states.empty())
 	{
 		states.back()->Cleanup();
-		delete states.back();
 		states.pop_back();
 	}
 

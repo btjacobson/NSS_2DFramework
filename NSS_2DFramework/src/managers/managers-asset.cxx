@@ -1,10 +1,15 @@
 module;
+#include "ft2build.h"
+#include FT_FREETYPE_H
 #include <unordered_map>
 #include <mutex>
 #include <string>
-#include "ft2build.h"
-#include FT_FREETYPE_H
+#include <filesystem>
+#include <ranges>
+#include <iostream>
 export module framework:managers.asset;
+
+import <compare>;
 
 import :renderer.texture2d;
 import :renderer.shader;
@@ -17,14 +22,16 @@ public:
 	Asset_Manager(Asset_Manager& other) = delete;
 
 	void operator=(const Asset_Manager& other) = delete;
+	void operator=(const Asset_Manager&& other) = delete;
 
-	void LoadTextureFromFile(const char* filepath, const char* name);
-	void LoadShaderFromFile(const char* vertexFilepath, const char* fragmentFilePath, const char* name);
-	void RemoveTexture(std::string textureName);
-	void RemoveShader(std::string shaderName);
+	void LoadTextureFromFile(const std::filesystem::path &filePath, const std::string &name);
+	void LoadShaderFromFile(const std::filesystem::path &vertPath, const std::filesystem::path &fragPath,const std::string &name);
+	void LoadAllShaders(const std::filesystem::path &shaderDirectory);
+	void RemoveTexture(const std::string &textureName);
+	void RemoveShader(const std::string &shaderName);
 
-	Texture2D* GetTexture(std::string textureName);
-	Shader* GetShader(std::string shaderName);
+	Texture2D* GetTexture(const std::string &textureName);
+	Shader* GetShader(const std::string &shaderName);
 
 protected:
 	static Asset_Manager* instance;
@@ -34,8 +41,8 @@ protected:
 	~Asset_Manager();
 
 private:
-	std::unordered_map<std::string, Texture2D*> textures;
-	std::unordered_map<std::string, Shader*> shaders;
+	std::unordered_map<std::string, std::unique_ptr<Texture2D>> textures;
+	std::unordered_map<std::string, std::unique_ptr<Shader>> shaders;
 };
 
 
@@ -49,16 +56,7 @@ Asset_Manager::Asset_Manager()
 
 Asset_Manager::~Asset_Manager()
 {
-	for (auto textureItr = textures.begin(); textureItr != textures.end(); textureItr++)
-	{
-		delete textureItr->second;
-	}
 	textures.clear();
-
-	for (auto shaderItr = shaders.begin(); shaderItr != shaders.end(); shaderItr++)
-	{
-		delete shaderItr->second;
-	}
 	shaders.clear();
 
 	delete instance;
@@ -76,7 +74,7 @@ Asset_Manager* Asset_Manager::GetInstance()
 	return instance;
 }
 
-void Asset_Manager::LoadTextureFromFile(const char* filepath, const char* name)
+void Asset_Manager::LoadTextureFromFile(const std::filesystem::path& filepath, const std::string& name)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
@@ -86,12 +84,12 @@ void Asset_Manager::LoadTextureFromFile(const char* filepath, const char* name)
 		return;
 	}
 
-	Texture2D* tTexture = new Texture2D(filepath);
+	std::unique_ptr<Texture2D> tTexture{std::make_unique<Texture2D>(filepath)};
 
-	textures.emplace(std::make_pair(name, tTexture));
+	textures.try_emplace(name, std::move(tTexture));
 }
 
-void Asset_Manager::LoadShaderFromFile(const char* vertexFilepath, const char* fragmentFilePath, const char* name)
+void Asset_Manager::LoadShaderFromFile(const std::filesystem::path& vertexFilepath, const std::filesystem::path& fragmentFilepath, const std::string& name)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
@@ -101,56 +99,65 @@ void Asset_Manager::LoadShaderFromFile(const char* vertexFilepath, const char* f
 		return;
 	}
 
-	Shader* tShader = new Shader(vertexFilepath, fragmentFilePath);
+	std::unique_ptr<Shader> tShader{ std::make_unique<Shader>(vertexFilepath, fragmentFilepath) };
 
-	shaders.emplace(std::make_pair(name, tShader));
+	shaders.try_emplace(name, std::move(tShader));
 }
 
-void Asset_Manager::RemoveTexture(std::string textureName)
+void Asset_Manager::LoadAllShaders(const std::filesystem::path& shaderDirectory)
+{
+	auto absolutePath{ std::filesystem::current_path() / shaderDirectory };
+	auto shaderFilter{[](std::filesystem::directory_entry file) {return file.path().extension().string() == ".vert";}};
+	for (auto&& file : std::filesystem::recursive_directory_iterator(absolutePath) | std::views::filter(shaderFilter)) //skips all non .vert files, assumes vert shaders have their counterpart
+	{
+		auto shaderName{file.path().stem().string()};
+		LoadShaderFromFile(absolutePath / (shaderName + ".vert"), absolutePath / (shaderName + ".frag"), shaderName);
+	}
+}
+
+void Asset_Manager::RemoveTexture(const std::string &textureName)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
 	auto tTexture = textures.find(textureName);
 	if (tTexture != textures.end())
 	{
-		delete tTexture->second;
 		textures.erase(tTexture);
 	}
 }
 
-void Asset_Manager::RemoveShader(std::string shaderName)
+void Asset_Manager::RemoveShader(const std::string &shaderName)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
 	auto tShader = shaders.find(shaderName);
 	if (tShader != shaders.end())
 	{
-		delete tShader->second;
 		shaders.erase(tShader);
 	}
 }
 
-Texture2D* Asset_Manager::GetTexture(std::string textureName)
+Texture2D* Asset_Manager::GetTexture(const std::string &textureName)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
 	auto tTexture = textures.find(textureName);
 	if (tTexture != textures.end())
 	{
-		return tTexture->second;
+		return tTexture->second.get();
 	}
 
 	return nullptr;
 }
 
-Shader* Asset_Manager::GetShader(std::string shaderName)
+Shader* Asset_Manager::GetShader(const std::string &shaderName)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 
 	auto tShader = shaders.find(shaderName);
 	if (tShader != shaders.end())
 	{
-		return tShader->second;
+		return tShader->second.get();
 	}
 
 	return nullptr;
