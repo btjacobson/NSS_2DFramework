@@ -2,14 +2,17 @@ module;
 #include "GL/glew.h"
 #include "stb_image.h"
 #include <iostream>
+#include <filesystem>
 export module framework:renderer.texture2d;
+
+import <compare>;
 
 export class Texture2D
 {
 public:
-	Texture2D(const char* filepath);
+	Texture2D(const std::filesystem::path& filepath);
 
-	void Generate(const char* filepath);
+	void Generate(const std::filesystem::path& filepath);
 	void Bind();
 	void Unbind();
 
@@ -25,15 +28,15 @@ private:
 	int channels;
 };
 
-Texture2D::Texture2D(const char* filepath) :
+Texture2D::Texture2D(const std::filesystem::path& filepath) :
 	wrapS(GL_REPEAT), wrapT(GL_REPEAT), filterMin(GL_NEAREST), filterMax(GL_NEAREST)
 {
 	Generate(filepath);
 }
 
-void Texture2D::Generate(const char* filepath)
+void Texture2D::Generate(const std::filesystem::path& filepath)
 {
-	unsigned char* data = stbi_load(filepath, &width, &height, &channels, STBI_rgb_alpha);
+	unsigned char* data = stbi_load(filepath.string().c_str(), &width, &height, &channels, STBI_rgb_alpha);
 	if (!data)
 	{
 		std::cout << "Failed to load texture: " << filepath << std::endl;
