@@ -14,6 +14,7 @@ public:
 	State_Manager(State_Manager& other) = delete;
 
 	void operator=(const State_Manager& other) = delete;
+	void operator=(const State_Manager&& other) = delete;
 
 	void ChangeState(std::unique_ptr<Base_State>&& state);
 	void PushState(std::unique_ptr<Base_State>&& state);
